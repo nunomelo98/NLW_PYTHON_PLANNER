@@ -4,7 +4,7 @@ from src.models.settings.db_connection_handler import db_connection_handler
 from .emails_to_invite_repository import EmailsToInviteRepository
 
 db_connection_handler.connect()
-trip_id = 11
+trip_id = str(uuid.uuid4())
 
 @pytest.mark.skip(reason="interacao com a base de dados")
 def test_resgistry_email():
