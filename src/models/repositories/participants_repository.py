@@ -25,15 +25,15 @@ class ParticipantsRepository:
         cursor = self.__conn.cursor()
         cursor.execute(
             '''
-               SELECT p.id, p.name, p.is_confirmed e.email
+               SELECT p.id, p.name, p.is_confirmed, e.email
                FROM participants as p
-               JOIN emails_to_invite_id as e ON e.id = p.emails_to_invite_id
-               WHERE trip_id = ?''', (trip_id,)
+               JOIN emails_to_invite as e ON e.id = p.emails_to_invite_id
+               WHERE p.trip_id = ?''', (trip_id,)
         )
         participants = cursor.fetchall()
         return participants
 
-    def update_participants_status(self, participant_id : str) -> None:
+    def update_participant_status(self, participant_id : str) -> None:
         cursor = self.__conn.cursor()
         cursor.execute(
             '''UPDATE participants
