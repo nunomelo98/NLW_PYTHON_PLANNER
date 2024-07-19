@@ -1,0 +1,369 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API documentation for the Trip Planner app",
+      "version": "1.0.0",
+      "title": "Trip App API"
+    },
+    "basePath": "/",
+    "paths": {
+      "/trips": {
+        "post": {
+          "summary": "Cria uma nova viagem",
+          "description": "",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Detalhes da viagem",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destination": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "emails_to_invite": {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  }
+                },
+                "required": ["destination", "start_date", "end_date","emails_to_invite"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Viagem criada com sucesso"
+            }
+          }
+        }
+      },
+      "/trips/{tripId}": {
+        "get": {
+          "summary": "Busca detalhes de uma viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Detalhes da viagem",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destination": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/trips/{tripId}/confirm": {
+        "get": {
+          "summary": "Confirma uma viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Viagem confirmada com sucesso"
+            }
+          }
+        }
+      },
+      "/trips/{tripId}/links": {
+        "post": {
+          "summary": "Cria um link para a viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Detalhes do link",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "required": ["url"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Link criado com sucesso"
+            }
+          }
+        },
+        "get": {
+          "summary": "Busca links da viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Links encontrados",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/trips/{tripId}/invites": {
+        "post": {
+          "summary": "Envia convites para a viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Detalhes do convite",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+
+                },
+                "required": ["name","email"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Convite enviado com sucesso"
+            }
+          }
+        }
+      },
+      "/trips/{tripId}/activities": {
+        "post": {
+          "summary": "Cria uma atividade para a viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Detalhes da atividade",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "occurs_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                },
+                "required": ["title", "occurs_at"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Atividade criada com sucesso"
+            }
+          }
+        },
+        "get": {
+          "summary": "Busca atividades da viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Atividades encontradas",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "activities": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "occurs_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/trips/{tripId}/participants": {
+        "get": {
+          "summary": "Busca participantes da viagem",
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Participantes encontrados",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "participants": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "confirmed": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/participants/{participantId}/confirm": {
+        "patch": {
+          "summary": "Confirma um participante",
+          "description": "",
+          "parameters": [
+            {
+              "name": "participantId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Participante confirmado com sucesso"
+            }
+          }
+        }
+      }
+    }
+  }
