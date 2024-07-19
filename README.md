@@ -43,10 +43,12 @@ pip install -r requirements.txt
 ```sh
 python run.py
 ```
-### A API estará disponível em http://localhost:3000.
+#### A API estará disponível em http://localhost:3000.
 
 ### Comandos
 ```sh
 # Roda os testes unitários
 pytest -s -v caminho_do_ficheiro/nome_do_ficheiro_test.py
 ```
+## Documentação
+A documentação foi gerada com o Swagger e se encontra em http://localhost:3000/docs.
