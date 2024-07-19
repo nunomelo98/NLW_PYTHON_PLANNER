@@ -8,7 +8,6 @@ Backend do Planner, uma aplicação de gerenciamento de viagens.
 - virtualvenv
 - Pylint
 - requests
-- Swagger
 
 ## Aprendizados importantes
 - Criação de uma REST API utilizando python e Flask
